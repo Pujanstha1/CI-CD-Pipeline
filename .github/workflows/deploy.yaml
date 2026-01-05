@@ -24,7 +24,7 @@ jobs:
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
           cat ~/.ssh/config 
           touch ~/.ssh/known_hosts
-          chomd 700 ~/.ssh/known_hosts
+          chmod 700 ~/.ssh/known_hosts
 
       - name: "SSH Key Access"
         run: |

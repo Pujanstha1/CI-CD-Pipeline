@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pipeline Success</title>
+  <title>CI/CD Auto Deployment Success</title>
 
   <style>
     * {
@@ -14,30 +14,30 @@
     }
 
     body {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #141e30, #243b55);
       color: #ffffff;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       padding: 40px 50px;
-      border-radius: 16px;
+      border-radius: 18px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      max-width: 420px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      max-width: 480px;
       width: 90%;
     }
 
     .checkmark {
-      width: 80px;
-      height: 80px;
+      width: 85px;
+      height: 85px;
       border-radius: 50%;
-      background: #2ecc71;
+      background: #27ae60;
       margin: 0 auto 20px;
       display: flex;
       align-items: center;
@@ -46,36 +46,56 @@
     }
 
     .checkmark svg {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       fill: #ffffff;
     }
 
     h1 {
-      font-size: 1.9rem;
-      margin-bottom: 10px;
+      font-size: 2rem;
+      margin-bottom: 8px;
     }
 
-    p {
+    .subtitle {
       font-size: 1rem;
       opacity: 0.9;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    .info-box {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 18px;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .info shows code {
+      color: #2ecc71;
+    }
+
+    .label {
+      color: #2ecc71;
+      font-weight: 600;
     }
 
     .badge {
       display: inline-block;
-      padding: 8px 14px;
+      margin-top: 18px;
+      padding: 8px 16px;
       border-radius: 999px;
-      background: #24292f;
+      background: #1f2933;
       color: #2ecc71;
       font-size: 0.85rem;
       font-weight: 600;
     }
 
     footer {
-      margin-top: 30px;
-      font-size: 0.8rem;
+      margin-top: 25px;
+      font-size: 0.75rem;
       opacity: 0.7;
+      text-align: center;
     }
 
     @keyframes pop {
@@ -99,13 +119,24 @@
       </svg>
     </div>
 
-    <h1>Deployment Successful</h1>
-    <p>Your GitHub Actions pipeline has completed successfully and the application is live.</p>
+    <h1>Auto Deployment Successful</h1>
+    <p class="subtitle">
+      This page was automatically deployed when <strong>index.html</strong>
+      was updated in the GitHub repository.
+    </p>
 
-    <span class="badge">✔ CI/CD Passed</span>
+    <div class="info-box">
+      <div><span class="label">Pipeline:</span> GitHub Actions CI/CD</div>
+      <div><span class="label">Branch:</span> main</div>
+      <div><span class="label">Commit SHA:</span> <code>{{GITHUB_SHA}}</code></div>
+      <div><span class="label">Deployed At:</span> <code>{{DEPLOY_TIME}}</code></div>
+      <div><span class="label">Server IP:</span> <code>{{SERVER_PUBLIC_IP}}</code></div>
+    </div>
+
+    <span class="badge">✔ Live from GitHub Actions</span>
 
     <footer>
-      Powered by GitHub Actions
+      Edit <code>index.html</code> → Push to GitHub → Auto deployed to Public IP
     </footer>
   </div>
 

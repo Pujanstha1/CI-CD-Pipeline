@@ -1,0 +1,40 @@
+name: Update index.html in my server.
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploymycode:
+    name: "Deploy my code in the Server"
+    runs-on: ubuntu-latest
+    env:
+      SERVER_IP: ${{ vars.SERVER_IP }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: "Configure SSH"
+        run: |
+          mkdir -p ~/.ssh 
+          chmod 700 ~/.ssh
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+          cat ~/.ssh/config 
+          touch ~/.ssh/known_hosts
+          chomd 700 ~/.ssh/known_hosts
+
+      - name: "SSH Key Access"
+        run: |
+          touch mykey.pem
+          echo "$SSH_KEY64" | base64 -d > mykey.pem && chmod 400 mykey.pem
+          ssh-keygen -R $SERVER_IP
+        
+        env:
+          SSH_KEY64: ${{ secrets.SSH_KEY64 }}
+
+      - name: "Deploy the code to my Server"
+        run: |
+          ssh -t ec2-user@$SERVER_IP - i mykey.pem 'cd /usr/share/nginx/html && git pull origin main'

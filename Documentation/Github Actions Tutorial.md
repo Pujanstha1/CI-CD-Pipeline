@@ -4,6 +4,8 @@
 
 This guide walks you through setting up continuous deployment for a static website using GitHub Actions, AWS EC2, and Nginx. By the end, any changes you push to your GitHub repository will automatically update your live website.
 
+![alt text](<images/Automating Web Development with GitHub Actions.png>)
+
 ## Prerequisites
 
 - An AWS account with EC2 access
